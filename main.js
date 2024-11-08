@@ -5,23 +5,28 @@ let ctx = canvas.getContext('2d');
 
 let maze = null;
 
-window.addEventListener('resize', () => {
+function resizeCanvas() {
     let widthWindow = window.innerWidth;
-    let heightWindow = window.innerHeight;
-
-if(widthWindow < 600) {
-    canvas.width = 300;
-    canvas.height = 300;
-    if(maze){
-        maze.stopGeneration();
-    }
-}else{
-    canvas.width = 600;
-    canvas.height = 600;
-    if(maze){
-        maze.stopGeneration();
+    let heightWindow = window.innerHeight
+    if(widthWindow < 600) {
+        canvas.width = 300;
+        canvas.height = 300;
+        if(maze){
+            maze.stopGeneration();
+        }
+    }else{
+        canvas.width = 600;
+        canvas.height = 600;
+        if(maze){
+            maze.stopGeneration();
+        }
     }
 }
+
+resizeCanvas();
+
+window.addEventListener('resize', () => {
+    resizeCanvas();
 });
 
 document.getElementById('generate').addEventListener('click', () => {
