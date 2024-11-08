@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MazeGen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+
+        <canvas id="mazeCanvas"></canvas>
+        <div id="control">
+            <h1>MazeGen</h1>
+            <div>
+                <label for="width">Width:</label>
+                <input type="number" id="width" value="10">
+            </div>
+            <div>
+                <label for="height">Height:</label>
+                <input type="number" id="height" value="10">
+            </div>
+            <div>
+                <label for="speed">Speed:</label>
+                <input type="range" id="speed" min="1" max="100" value="50">
+            </div>
+            <div>
+                <label for="algorithm">Algorithm:</label>
+                <select id="algorithm">
+                    <option value="dfs">Depth First Search</option>
+                    <option value="prim">Prim's Algorithm</option>
+                    <option value="kruskal">Kruskal's Algorithm</option>
+                </select>
+            </div>
+            <button id="generate">Generate</button>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+
+</body>
+</html>
