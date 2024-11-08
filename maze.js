@@ -1,5 +1,5 @@
 export default class Maze {
-    constructor(width, height, algorithm, speed, ctx) {
+    constructor(width, height, algorithm, speed, ctx,timer) {
         let canvasWidth = document.getElementById('mazeCanvas').width;
         let windowWidth = window.innerWidth;
         if (windowWidth < 600) {
@@ -18,6 +18,7 @@ export default class Maze {
         this.end = { x: width - 1, y: height - 1 };
         this.startTime = null; // Variable pour stocker l'heure de début
         this.generateGridLive(algorithm, speed);
+        this.timer = timer;
     }
 
     generateGridLive(algorithm, speed) {
@@ -212,11 +213,33 @@ export default class Maze {
         }, speed);
     }
 
+
+    parseTime(time) {
+        let seconds = time / 1000;
+        let minutes = Math.floor(seconds / 60);
+        let miliseconds = Math.floor((seconds % 1) * 1000);
+        seconds = Math.floor(seconds % 60);
+        let returnString = ''
+        if (minutes > 0) {
+            returnString += `${minutes} minutes et `;
+        }
+        if (seconds > 0) {
+            returnString += `${seconds} secondes et `;
+        }
+        returnString += `${miliseconds} milisecondes`;
+
+
+
+        return returnString;
+
+    }
+
     // Afficher le temps total de génération
     displayGenerationTime() {
         const endTime = Date.now();
         const totalTime = (endTime - this.startTime) / 1000; // Temps en secondes
         console.log(`Maze generated in ${totalTime} seconds`);
+        this.timer.innerHTML = `Maze generated in ${this.parseTime( (endTime - this.startTime))}`;
     }
 
     drawGrid(grid, currentCells = []) {

@@ -5,17 +5,27 @@ let ctx = canvas.getContext('2d');
 
 let maze = null;
 
-let widthWindow = window.innerWidth;
-let heightWindow = window.innerHeight;
+window.addEventListener('resize', () => {
+    let widthWindow = window.innerWidth;
+    let heightWindow = window.innerHeight;
+
 if(widthWindow < 600) {
     canvas.width = 300;
     canvas.height = 300;
+    if(maze){
+        maze.stopGeneration();
+    }
 }else{
     canvas.width = 600;
     canvas.height = 600;
+    if(maze){
+        maze.stopGeneration();
+    }
 }
+});
 
 document.getElementById('generate').addEventListener('click', () => {
+    document.getElementById('timer').innerHTML = '';
     let width = document.getElementById('width').value;
     let height = document.getElementById('height').value;
     let algorithm = document.getElementById('algorithm').value;
@@ -23,6 +33,6 @@ document.getElementById('generate').addEventListener('click', () => {
     if (maze) {
         maze.stopGeneration();
     }
-    new Maze(width, height, algorithm, speed, ctx);
+    new Maze(width, height, algorithm, speed, ctx,document.getElementById('timer'))
 });
 
